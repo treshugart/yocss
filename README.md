@@ -1,6 +1,6 @@
 # YoCSS
 
-> An 800 byte CSS-in-JS library for purists.
+> A zero-dependency, 800 byte CSS-in-JS library for purists.
 
 ## Install
 
