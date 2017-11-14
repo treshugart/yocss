@@ -65,6 +65,39 @@ const Div = styled('div', props => {
 });
 ```
 
+### Nesting
+
+**This part is experimental. Not nesting, but the syntax.**
+
+Nesting works a little bit different some things that you might be used to. This is for simplicity. When nesting, selectors are naturally just CSS, as opposed to using anything like Less as a superset. For example, instead of doing something like `&.another-class`, you just do `another-class`. For example:
+
+```js
+css({
+  backgroundColor: 'black',
+  color: 'white',
+
+  // Instead of doing '&.link', you'd do:
+  link: {
+    color: 'blue'
+  }
+});
+```
+
+Nesting child and descendant selectors work similarly:
+
+```js
+css({
+  backgroundColor: 'black',
+  color: 'white',
+  ' .link': {
+    color: 'blue'
+  },
+  ' > .link': {
+    color: 'blue'
+  }
+});
+```
+
 ### Shadow DOM
 
 There's not much you have to do to support shadow DOM. Basically you just don't append to the head, and don't scope the styles. You still get the sugar of using objects - which is awesome :D - but without having to emulate scoping and deal with minification - which is more awesome :D.
