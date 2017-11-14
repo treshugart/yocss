@@ -46,6 +46,25 @@ const Div = styled('div', {
 });
 ```
 
+And you can even respond to props:
+
+```js
+import { css } from 'yocss';
+import React from 'react';
+
+const styled = (Type, styles) =>
+  props =>
+    <Type
+      {...props}
+      className={css(typeof styles === 'function' ? styles(props) : styles)}
+    />;
+
+const Div = styled('div', props => {
+  backgroundColor: props.dark ? 'black' : 'white',
+  color: props.dark ? 'white' : 'black'
+});
+```
+
 ### Shadow DOM
 
 There's not much you have to do to support shadow DOM. Basically you just don't append to the head, and don't scope the styles. You still get the sugar of using objects - which is awesome :D - but without having to emulate scoping and deal with minification - which is more awesome :D.
