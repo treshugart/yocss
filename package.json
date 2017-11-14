@@ -101,5 +101,6 @@
   "name": "yocss",
   "description": "",
   "author": "Trey Shugart <treshugart@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "version": "0.0.0"
 }
