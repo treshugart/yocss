@@ -13,5 +13,5 @@ test('obj', () => {
   const rule2 = sheet.cssRules[1];
   expect(className).toBe('_-0');
   expect(rule1.cssText).toBe('._-0 {rule-1: value 1; rule-2: value 2;}');
-  expect(rule2.cssText).toBe('.rule3-0 {rule-4: value 4;}');
+  expect(rule2.cssText).toBe('._-0.rule3-0 {rule-4: value 4;}');
 });
