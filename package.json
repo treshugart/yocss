@@ -98,9 +98,8 @@
     ]
   },
   "browser": "umd/index.js",
-  "name": "css-in",
-  "version": "0.0.0",
+  "name": "yocss",
   "description": "",
-  "author": "",
-  "license": "ISC"
+  "author": "Trey Shugart <treshugart@gmail.com>",
+  "license": "MIT"
 }
