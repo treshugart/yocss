@@ -2,6 +2,8 @@
 
 > A zero-dependency, 800 byte CSS-in-JS library for purists.
 
+** The goal of this was to learn the ins and outs of CSS in JS intricacies, but happy to evolve and maintain it. Since it's in the early stages, it's experimental, but if you have any ideas, suggestions or want to contribute, please do!**
+
 ## Install
 
 ```sh
