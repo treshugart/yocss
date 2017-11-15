@@ -12,10 +12,10 @@ npm install yocss
 
 ## Usage
 
-YoCSS is all about objects. Do whatever you want with an object and just pass it off to `css()`. It will then take your object, convert it to a CSS rule and insert it into the global stylesheet.
+YoCSS is all about objects. Do whatever you want with an object and just pass it off to `css()`. It will then take your object, convert it to a CSS rule and insert it into a global stylesheet.
 
 ```js
-import { css } from 'yocss';
+import css from 'yocss';
 
 const className = css({
   backgroundColor: 'black',
@@ -26,7 +26,7 @@ const className = css({
 You can take this return value and do whatever you want with it. You may be using React:
 
 ```js
-import { css } from 'yocss';
+import css from 'yocss';
 import React from 'react';
 
 const Div = props => <div {...props} className={css({
@@ -38,7 +38,7 @@ const Div = props => <div {...props} className={css({
 You can even create a very simplistic function to stamp out primitives for you:
 
 ```js
-import { css } from 'yocss';
+import css from 'yocss';
 import React from 'react';
 
 const styled = (Type, styles) => props => <Type {...props} className={css(styles)} />;
@@ -51,7 +51,7 @@ const Div = styled('div', {
 And you can even respond to props:
 
 ```js
-import { css } from 'yocss';
+import css from 'yocss';
 import React from 'react';
 
 const styled = (Type, styles) =>
