@@ -12,9 +12,7 @@ npm install yocss
 
 ## Usage
 
-YoCSS is all about objects. Do whatever you want with an object and just pass it off to `css()`. It will then take your object, convert it to a CSS rule and insert it into a global stylesheet.
-
-The `css()` function returns a function that, when converted to a string, will return the class name.
+YoCSS is all about objects. Do whatever you want with an object and just pass it off to `css()`. It will then take your object, convert it to a CSS rule and insert it into a global stylesheet, returning the resulting `className` for the set of rules as a string.
 
 ```js
 import css from 'yocss';
@@ -73,20 +71,20 @@ const Div = styled('div', props => ({
 
 ### Shadow DOM
 
-Since `css()` returns a function, using it with Shadow DOM is super simple because you can call the returned function to get the CSS string and insert that directly into your `<style>` element.
+Since `css()` returns a string, you need a separate function to get the CSS for the `className` that was returned. You can use the `cssFor()` function to get the CSS for a particular `className` as a string.
 
 ```js
-import css from 'yocss';
+import css, { cssFor } from 'yocss';
 
 class Test extends HTMLElement {
   connectedCallback() {
-    const styles = css({
+    const className = css({
       backgroundColor: 'black',
       color: 'white'
     });
     this.attachShadow({ mode: 'open' }).innerHTML = `
-      <style>${styles()}</style>
-      <div class="${styles}">Woot!</div>
+      <style>${cssFor(className)}</style>
+      <div class="${className}">Woot!</div>
     `;
   }
 }
@@ -94,7 +92,7 @@ class Test extends HTMLElement {
 customElements.define('x-test', Test);
 ```
 
-Something unique to this methodology, is that if you were to server-side render your custom element, scoped styles would still apply to it even without a shadow root. This is because `css()` has inserted pre-scoped styles to a global stylesheet, and your `<div>` would have the appropriate class name already on it.
+Something unique to this methodology, is that if you were to server-side render your custom element, scoped styles would still apply to it even without a shadow root. This is because `css()` has inserted pre-scoped styles to a global stylesheet, and your `<div>` would have the appropriate class name already on it. When the component is initialised, its shadow root will get the styles so that they apply within its scope.
 
 ### Class name format
 
