@@ -93,7 +93,7 @@
     "node/",
     "umd/"
   ],
-  "main": "index.js",
+  "main": "node/index.js",
   "module": "es/index.js",
   "esnext": "esnext/index.js",
   "scripts": {
