@@ -1,4 +1,4 @@
-import css from '../css';
+import css, { cssFor } from '..';
 
 function rule(index) {
   return document.head.lastElementChild.sheet.cssRules[index].cssText;
@@ -28,7 +28,7 @@ test('obj', () => {
   expect(rule(3)).toBe('._0 > .selector3 {rule-4: value 4;}');
 
   // Returns styles if called.
-  expect(className()).toBe(
+  expect(cssFor(className)).toBe(
     '._0{rule-1:value 1}._0 .selector1{rule-2:value 2}._0 .selector2{rule-3:value 3}._0 > .selector3{rule-4:value 4}'
   );
 });

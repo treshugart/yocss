@@ -102,6 +102,7 @@
     "build:node": "BABEL_ENV=node babel src --out-dir node",
     "build:rollup": "BABEL_ENV=rollup rollup -c && BABEL_ENV=rollup rollup -c --min",
     "prepare": "npm run build:es && npm run build:esnext && npm run build:node && npm run build:rollup",
+    "size": "gzip -c umd/index.min.js | wc -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "jest": {
