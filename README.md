@@ -86,8 +86,8 @@ css({
   // ._0 link
   ' link': {},
 
-  // ._0>.link
-  '>.link': {}
+  // ._0 >.link
+  ' >.link': {}
 
   // ._0.link
   '&.link': {}
@@ -97,7 +97,7 @@ css({
 });
 ```
 
-Rules that are contained in separate blocks, but eventually end up as the same selector will be merged into the same set of rules. For example:
+Rules that are contained in separate blocks, but eventually end up as the same selector, will be merged into the same set of rules. For example:
 
 ```js
 css({
