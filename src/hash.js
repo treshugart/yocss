@@ -1,7 +1,7 @@
-const cache = {};
+import memoize from './memoize';
+
 let count = 0;
 
-export default function(obj) {
-  const key = JSON.stringify(obj);
-  return key in cache ? cache[key] : (cache[key] = count++);
-}
+export default memoize(function(obj) {
+  return count++;
+});

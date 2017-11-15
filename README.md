@@ -12,7 +12,7 @@ npm install yocss
 
 ## Usage
 
-YoCSS is all about objects. Do whatever you want with an object and just pass it off to the YoCSS functions. The most common function is probably `css()`. This takes an object, converts it to CSS and appends it to the head if it needs to be, and returns the unique class name.
+YoCSS is all about objects. Do whatever you want with an object and just pass it off to `css()`. It will then take your object, convert it to a CSS rule and insert it into the global stylesheet.
 
 ```js
 import { css } from 'yocss';
@@ -69,7 +69,7 @@ const Div = styled('div', props => ({
 
 ### Class name format
 
-YoCSS scopes styles using a class name format of `_${suffix}` where `${suffix}` is a number unique to that set of CSS rules. So, wherever you see something like `._0`, it's representing the class name or a selector for it.
+YoCSS scopes styles using a class name format of `_${suffix}` where `${suffix}` is a number unique to that set of CSS rules. So, wherever you see something like `._0`, it's representing the scoping class or a selector for it.
 
 ### Nesting
 
@@ -91,6 +91,9 @@ css({
 
   // ._0.link
   '&.link': {}
+
+  // tag._0
+  '&tag': {}
 });
 ```
 
@@ -114,44 +117,14 @@ Would merge into:
 }
 ```
 
-### Shadow DOM
-
-There's not much you have to do to support shadow DOM. Basically you just don't append to the head, and don't scope the styles. You still get the sugar of using objects - which is awesome :D - but without having to emulate scoping and deal with minification - which is more awesome :D.
-
-```js
-import { shadow } from 'yocss';
-
-class Test extends HTMLElement {
-  constructor() {
-    this.attachShadow({ mode: 'open' })
-  }
-  connectedCallback() {
-    this.shadowRoot.innerHTML = `
-      <style>${shadow({
-        ':host': {
-          backgroundColor: 'black',
-          color: 'white'
-        }
-      })}</style>
-      <slot></slot>
-    `;
-  }
-}
-
-customElements.define('x-test', Test);
-```
-
 ### Global styles
 
-To juxtapose shadow DOM encapsulation, we've created a `light()` function that is similar to both `css()` and `shadow()`. It doesn't scope styles, but it does manage them in a global style sheet.
+Globals styles can be specified using the `:global(selector)` syntax where `selector` is the selector you want to use globally.
 
 ```js
-import { light } from 'yocss';
-
-light({
-  body: {
-    backgroundColor: 'black',
-    color: 'white'
+css({
+  ':global(body)': {
+    fontFamily: 'Helvetica'
   }
-});
+})
 ```

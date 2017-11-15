@@ -1,7 +1,6 @@
-import hash from './hash';
 import selector from './selector';
 
-export default function namespace(obj, suffix) {
+export default function(obj, suffix) {
   const copy = {};
   for (const key in obj) {
     const newKey = selector(key, suffix);

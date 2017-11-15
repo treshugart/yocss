@@ -1,22 +1,21 @@
-const inserted = {};
+import memoize from './memoize';
+
+const MAX_RULES_PER_SHEET = 10000;
 const styles = [];
 
 function current() {
   return styles[styles.length - 1];
 }
 
-function insertOne(rule) {
-  if (rule in inserted) {
-    return;
-  }
+const insertOne = memoize(function(rule) {
   let style = current();
-  if (!style || style.sheet.cssRules.length > 10000) {
+  if (!style || style.sheet.cssRules.length > MAX_RULES_PER_SHEET) {
     style = document.createElement('style');
     document.head.appendChild(style);
     styles.push(style);
   }
-  inserted[rule] = style.sheet.insertRule(rule, style.sheet.cssRules.length);
-}
+  style.sheet.insertRule(rule, style.sheet.cssRules.length);
+});
 
 export default function insert(css) {
   css.forEach(rule => insertOne(rule));
