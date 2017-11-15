@@ -61,10 +61,10 @@ const styled = (Type, styles) =>
       className={css(typeof styles === 'function' ? styles(props) : styles)}
     />;
 
-const Div = styled('div', props => {
+const Div = styled('div', props => ({
   backgroundColor: props.dark ? 'black' : 'white',
   color: props.dark ? 'white' : 'black'
-});
+}));
 ```
 
 ### Nesting
