@@ -67,21 +67,29 @@ const Div = styled('div', props => ({
 }));
 ```
 
+### Class name format
+
+YoCSS scopes styles using a class name format of `_${suffix}` where `${suffix}` is a number unique to that set of CSS rules. So, wherever you see something like `._0`, it's representing the class name or a selector for it.
+
 ### Nesting
 
 Nesting works similarly to other libraries.
 
 ```js
 css({
-  // _0 .link
+  // ._0 .link
   link: {},
-  // _0 .link
+
+  // ._0 .link
   ' .link': {},
-  // _0 link
+
+  // ._0 link
   ' link': {},
-  // _0>.link
+
+  // ._0>.link
   '>.link': {}
-  // _0.link
+
+  // ._0.link
   '&.link': {}
 });
 ```
@@ -99,7 +107,7 @@ Would merge into:
 
 ```js
 {
-  '_0 .link': {
+  '._0 .link': {
     key1: 'val1',
     key2: 'val2'
   }
