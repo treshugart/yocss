@@ -73,7 +73,7 @@ const Div = styled('div', props => ({
 
 ### Shadow DOM
 
-Since `css()` returns a function, using it in with Shadow DOM is super simple because you can call the returned function to get the CSS string and insert that directly into your `<style>` element.
+Since `css()` returns a function, using it with Shadow DOM is super simple because you can call the returned function to get the CSS string and insert that directly into your `<style>` element.
 
 ```js
 import css from 'yocss';
