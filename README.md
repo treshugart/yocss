@@ -14,6 +14,8 @@ npm install yocss
 
 YoCSS is all about objects. Do whatever you want with an object and just pass it off to `css()`. It will then take your object, convert it to a CSS rule and insert it into a global stylesheet.
 
+The `css()` function returns a function that, when converted to a string, will return the class name.
+
 ```js
 import css from 'yocss';
 
@@ -22,6 +24,8 @@ const className = css({
   color: 'white'
 });
 ```
+
+### React et al
 
 You can take this return value and do whatever you want with it. You may be using React:
 
@@ -66,6 +70,31 @@ const Div = styled('div', props => ({
   color: props.dark ? 'white' : 'black'
 }));
 ```
+
+### Shadow DOM
+
+Since `css()` returns a function, using it in with Shadow DOM is super simple because you can call the returned function to get the CSS string and insert that directly into your `<style>` element.
+
+```js
+import css from 'yocss';
+
+class Test extends HTMLElement {
+  connectedCallback() {
+    const styles = css({
+      backgroundColor: 'black',
+      color: 'white'
+    });
+    this.attachShadow({ mode: 'open' }).innerHTML = `
+      <style>${styles()}</style>
+      <div class="${styles}">Woot!</div>
+    `;
+  }
+}
+
+customElements.define('x-test', Test);
+```
+
+Something unique to this methodology, is that if you were to server-side render your custom element, scoped styles would still apply to it even without a shadow root. This is because `css()` has inserted pre-scoped styles to a global stylesheet, and your `<div>` would have the appropriate class name already on it.
 
 ### Class name format
 
