@@ -1,4 +1,4 @@
-import css, { merge, names, styles } from '..';
+import css, { merge, names, stringify } from '..';
 
 function rule(index) {
   return document.head.lastElementChild.sheet.cssRules[index].cssText;
@@ -45,7 +45,7 @@ test('names', () => {
 });
 
 test('styles', () => {
-  expect(styles(merge({
+  expect(stringify(merge({
     cx1: { rule1: 'value 1' },
     cx2: { rule2: 'value 2' }
   }))).toBe('._2{rule-1:value 1}._1{rule-2:value 2}');

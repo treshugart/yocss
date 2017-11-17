@@ -29,7 +29,7 @@ export function names(obj) {
   return values(obj).filter(Boolean).join(' ');
 }
 
-export function styles(obj) {
+export function stringify(obj) {
   return values(obj).map(v => classToCssMap[v]).filter(Boolean).join('');
 }
 

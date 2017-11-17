@@ -74,17 +74,22 @@ const Div = styled('div', props => ({
 Since `css()` returns a string, you need a separate function to get the CSS for the `className` that was returned. You can use the `cssFor()` function to get the CSS for a particular `className` as a string.
 
 ```js
-import css, { cssFor } from 'yocss';
+import { merge, names, stringify } from 'yocss';
+
+const styles = merge({
+  class1: {
+    backgroundColor: 'black'
+  },
+  class2: {
+    color: 'white'
+  }
+});
 
 class Test extends HTMLElement {
   connectedCallback() {
-    const className = css({
-      backgroundColor: 'black',
-      color: 'white'
-    });
     this.attachShadow({ mode: 'open' }).innerHTML = `
-      <style>${cssFor(className)}</style>
-      <div class="${className}">Woot!</div>
+      <style>${stringify(styles)}</style>
+      <div class="${names(styles)}">Woot!</div>
     `;
   }
 }
