@@ -1,10 +1,10 @@
-import css, { cssFor } from '..';
+import css, { merge, names, styles } from '..';
 
 function rule(index) {
   return document.head.lastElementChild.sheet.cssRules[index].cssText;
 }
 
-test('obj', () => {
+test('css', () => {
   const className = css({
     rule1: 'value 1',
     selector1: {
@@ -26,9 +26,27 @@ test('obj', () => {
   expect(rule(1)).toBe('._0 .selector1 {rule-2: value 2;}');
   expect(rule(2)).toBe('._0 .selector2 {rule-3: value 3;}');
   expect(rule(3)).toBe('._0 > .selector3 {rule-4: value 4;}');
+});
 
-  // Returns styles if called.
-  expect(cssFor(className)).toBe(
-    '._0{rule-1:value 1}._0 .selector1{rule-2:value 2}._0 .selector2{rule-3:value 3}._0 > .selector3{rule-4:value 4}'
-  );
+test('merge', () => {
+  const merged = merge({
+    cx1: { rule1: 'value 1' },
+    cx2: css({ rule2: 'value 2' })
+  });
+  expect(merged.cx1).toBe('_2');
+  expect(merged.cx2).toBe('_1');
+});
+
+test('names', () => {
+  expect(names(merge({
+    cx1: { rule1: 'value 1' },
+    cx2: { rule2: 'value 2' }
+  }))).toBe('_2 _1');
+});
+
+test('styles', () => {
+  expect(styles(merge({
+    cx1: { rule1: 'value 1' },
+    cx2: { rule2: 'value 2' }
+  }))).toBe('._2{rule-1:value 1}._1{rule-2:value 2}');
 });

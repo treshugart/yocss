@@ -6,8 +6,10 @@ import namespace from './namespace';
 import parse from './parse';
 
 const classToCssMap = {};
+const values = obj => Object.keys(obj).reduce((p, c) => p.concat(obj[c]), []);
 
-export default memoize(function(obj) {
+const css = memoize(function (obj) {
+  if (typeof obj === 'string') return obj;
   const suffix = hash(obj);
   const parsed = parse(namespace(flat(obj), suffix));
   const className = `_${suffix}`;
@@ -16,6 +18,19 @@ export default memoize(function(obj) {
   return className;
 });
 
-export function cssFor(className) {
-  return classToCssMap[className];
+export function merge(obj) {
+  return Object.keys(obj).reduce((p, c) => {
+    p[c] = css(obj[c]);
+    return p;
+  }, {});
 }
+
+export function names(obj) {
+  return values(obj).filter(Boolean).join(' ');
+}
+
+export function styles(obj) {
+  return values(obj).map(v => classToCssMap[v]).filter(Boolean).join('');
+}
+
+export default css;
