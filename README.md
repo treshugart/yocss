@@ -71,7 +71,7 @@ const Div = styled('div', props => ({
 
 ### Shadow DOM
 
-Since `css()` returns a string, you need a separate function to get the CSS for the `className` that was returned. You can use the `cssFor()` function to get the CSS for a particular `className` as a string.
+The `css()` function returns a string. The `stringify()` function requies an object, so it's simpler here to just retain an object of calls to `css()` by using `merge()`. This calls `css()` intenrally on each value and returns an object. We can then just pass off the result to both `names()` - to get the class names - and `stringify()` to get the actual CSS result of all the styles.
 
 ```js
 import { merge, names, stringify } from 'yocss';
