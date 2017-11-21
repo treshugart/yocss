@@ -1,19 +1,13 @@
 import dashcase from './dashcase';
 
-export default function flat(obj, pre = '') {
-  let main;
-  let copy = {};
+export default function flat(obj) {
+  const ret = { _: {} };
   for (const key in obj) {
     if (typeof obj[key] === 'object') {
-      copy[pre + key] = { ...copy[key], ...flat(obj[key], key) };
-    } else if (pre) {
-      copy[dashcase(key)] = obj[key];
+      ret[key] = obj[key];
     } else {
-      if (!copy._) {
-        main = copy._ = {};
-      }
-      main[dashcase(key)] = obj[key];
+      ret._[dashcase(key)] = obj[key];
     }
   }
-  return copy;
+  return ret;
 }

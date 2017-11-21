@@ -6,31 +6,36 @@ import namespace from './namespace';
 import parse from './parse';
 
 const classToCssMap = {};
-const values = obj => Object.keys(obj).reduce((p, c) => p.concat(obj[c]), []);
+const classToObjMap = {};
 
-const css = memoize(function (obj) {
-  if (typeof obj === 'string') return obj;
+const process = memoize(function(obj) {
   const suffix = hash(obj);
-  const parsed = parse(namespace(flat(obj), suffix));
   const className = `_${suffix}`;
+  const flattened = flat(obj, classToObjMap);
+  const parsed = parse(namespace(flattened, suffix));
   classToCssMap[className] = parsed.join('');
-  insert(parsed);
-  return className;
+  classToObjMap[className] = flattened._;
+  return { className, parsed };
 });
 
-export function merge(obj) {
-  return Object.keys(obj).reduce((p, c) => {
-    p[c] = css(obj[c]);
-    return p;
-  }, {});
+export default function css(obj) {
+  const { className, parsed } = process(obj);
+  insert(parsed);
+  return className;
 }
 
-export function names(obj) {
-  return values(obj).filter(Boolean).join(' ');
+export function raw(obj) {
+  return process(obj).className;
 }
 
-export function stringify(obj) {
-  return values(obj).map(v => classToCssMap[v]).filter(Boolean).join('');
+export function names(...css) {
+  return css.filter(Boolean).join(' ');
 }
 
-export default css;
+export function rules(...css) {
+  return css.reduce((p, c) => ({ ...p, ...classToObjMap[c] }), {});
+}
+
+export function value(...css) {
+  return css.map(c => classToCssMap[c]).join('');
+}

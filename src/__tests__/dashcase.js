@@ -9,5 +9,5 @@ test('CamelCapped', () => {
 });
 
 test('M1x3d', () => {
-  expect(dashcase('M1x3d')).toBe('m-1x-3d');
+  expect(dashcase('M1X3d')).toBe('m1-x3d');
 });
