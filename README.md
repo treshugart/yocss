@@ -164,11 +164,11 @@ Would merge into:
 
 ### Global styles
 
-Globals styles can be specified using the `:global(selector)` syntax where `selector` is the selector you want to use globally.
+Globals styles can be specified by prefixing your selector with `* selector` syntax where `selector` is the selector you want to use globally.
 
 ```js
 css({
-  ':global(body)': {
+  '* body': {
     fontFamily: 'Helvetica'
   }
 })
