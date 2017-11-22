@@ -21,6 +21,8 @@ test(':pseudo', () => {
 });
 
 test('* (global)', () => {
+  expect(selector('**')).toBe('*');
+  expect(selector('**', 'test')).toBe('*');
   expect(selector('* body')).toBe('body');
   expect(selector('* body', 'test')).toBe('body');
 });

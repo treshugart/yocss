@@ -173,3 +173,13 @@ css({
   }
 })
 ```
+
+This only works as a prefix and since `*` already has special meaning as selecting everything, if you want to do so, simply use `**`.
+
+```js
+css({
+  '**': {
+    fontFamily: 'Helvetica'
+  }
+});
+```
