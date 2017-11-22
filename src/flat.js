@@ -1,4 +1,5 @@
 import dashcase from './dashcase';
+import { classToObjMap } from './maps';
 
 export default function flat(obj) {
   const ret = {};

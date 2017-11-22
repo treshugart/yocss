@@ -20,9 +20,9 @@ test(':pseudo', () => {
   expect(selector(':test', 'test')).toBe('._test:test');
 });
 
-test(':global', () => {
-  expect(selector(':global(body)')).toBe('body');
-  expect(selector(':global(body)', 'test')).toBe('body');
+test('* (global)', () => {
+  expect(selector('* body')).toBe('body');
+  expect(selector('* body', 'test')).toBe('body');
 });
 
 test('[identifier]', () => {

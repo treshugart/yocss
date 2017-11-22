@@ -4,14 +4,12 @@ import insert from './insert';
 import memoize from './memoize';
 import namespace from './namespace';
 import parse from './parse';
-
-const classToCssMap = {};
-const classToObjMap = {};
+import { classToCssMap, classToObjMap } from './maps';
 
 const process = memoize(function(obj) {
   const suffix = hash(obj);
   const className = `_${suffix}`;
-  const flattened = flat(obj, classToObjMap);
+  const flattened = flat(obj);
   const parsed = parse(namespace(flattened, suffix));
   classToCssMap[className] = parsed.join('');
   classToObjMap[className] = flattened._;

@@ -23,14 +23,14 @@ test('css', () => {
       rule2: 'value 2'
     },
     [nested1]: rules(nested1),
-    [` > .${nested2}`]: rules(nested2)
+    [`> .${nested2}`]: rules(nested2)
   });
 
   expect(className).toBe('_2');
   expect(rule(0)).toBe('._2 {rule1: value 1;}');
   expect(rule(1)).toBe('._2 .selector1 {rule2: value 2;}');
   expect(rule(2)).toBe('._2 ._0 {rule3: value 3;}');
-  expect(rule(3)).toBe('._2 > ._1 {rule4: value 4;}');
+  expect(rule(3)).toBe('._2>._1 {rule4: value 4;}');
 });
 
 test('names', () => {
